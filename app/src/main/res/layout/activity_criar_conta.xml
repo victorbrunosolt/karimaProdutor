@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.victorbruno.karimaprodutor.activity.CriarContaActivity"
+    android:background="@drawable/background">
+
+    <TextView
+        android:id="@+id/text_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Criar Conta"
+        android:textSize="24dp"
+        android:textAppearance="@android:style/TextAppearance.Material.Title"
+        tools:layout_editor_absoluteX="71dp"
+        tools:layout_editor_absoluteY="71dp"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="54dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+
+    <EditText
+        android:id="@+id/editText_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Nome"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:layout_above="@+id/editText_email"
+        android:layout_alignLeft="@+id/editText_email"
+        android:layout_alignStart="@+id/editText_email" />
+
+    <EditText
+        android:id="@+id/editText_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:hint="Email"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignBottom="@+id/editText_senha"
+        android:layout_alignLeft="@+id/editText_senha"
+        android:layout_alignStart="@+id/editText_senha"
+        android:layout_marginBottom="60dp" />
+
+    <EditText
+        android:id="@+id/editText_senha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+
+        android:hint="Senha"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="68dp"
+        android:layout_marginStart="68dp" />
+
+    <Button
+        android:id="@+id/button_cadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Proximo"
+        android:layout_below="@+id/editText_senha"
+        android:layout_alignLeft="@+id/text_titulo"
+        android:layout_alignStart="@+id/text_titulo"
+        android:layout_marginTop="37dp" />
+
+
+</RelativeLayout>
