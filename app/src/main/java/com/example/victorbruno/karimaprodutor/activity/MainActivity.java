@@ -1,16 +1,14 @@
 package com.example.victorbruno.karimaprodutor.activity;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.view.PagerAdapter;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.example.victorbruno.karimaprodutor.R;
 import com.example.victorbruno.karimaprodutor.adapter.TabsAdapter;
 import com.example.victorbruno.karimaprodutor.util.SlidingTabLayout;
+import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +19,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
+
+        if (ParseUser.getCurrentUser() == null) {
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+
+
+        } else{
+
+
+
         setContentView(R.layout.activity_main);
 
 
@@ -47,5 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
     }
 }

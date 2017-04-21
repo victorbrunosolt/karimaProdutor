@@ -1,6 +1,7 @@
 package com.example.victorbruno.karimaprodutor.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.victorbruno.karimaprodutor.R;
+import com.example.victorbruno.karimaprodutor.activity.LoginActivity;
 import com.parse.ParseUser;
 
 /**
@@ -27,8 +29,20 @@ public class ContaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_conta, container, false);
+
+        sair = (Button)view.findViewById(R.id.button_sair);
+        sair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_conta, container, false);
+        return view;
     }
 
 }

@@ -1,15 +1,10 @@
 package com.example.victorbruno.karimaprodutor.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.CollapsingToolbarLayout;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,7 +13,6 @@ import com.parse.ParseObject;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by VictorBruno on 17/04/17.
@@ -28,8 +22,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.myView
     private Context mContext;
     private ArrayList<ParseObject> postagensProdutor;
     private LayoutInflater mLayoutInflater;
-    //  private TextView titulo;
-    //  private  TextView legenda;
+
 
     public TimeLineAdapter(Context c, ArrayList<ParseObject> objects) {
         mContext = c;

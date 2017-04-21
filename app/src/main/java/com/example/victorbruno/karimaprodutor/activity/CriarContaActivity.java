@@ -1,12 +1,11 @@
 package com.example.victorbruno.karimaprodutor.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.victorbruno.karimaprodutor.R;
@@ -56,6 +55,9 @@ public class CriarContaActivity extends AppCompatActivity {
             public void done(ParseException e) {
                 if (e == null) {
                     Toast.makeText(getApplicationContext(),"conta criada com sucesso", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(CriarContaActivity.this, MainActivity.class);
+                    startActivity(intent);
                 } else {
 
                     Toast.makeText(getApplicationContext(),"não foi possivel criar a conta" + e, Toast.LENGTH_SHORT).show();

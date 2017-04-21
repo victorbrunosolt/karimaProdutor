@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
@@ -35,10 +35,21 @@
             android:name=".activity.CriarContaActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
-
-        <activity android:name=".activity.MainActivity"
+        <activity
+            android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemeNoActionBar"></activity>
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity android:name=".activity.CadastrarCsaActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.GraficosActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activity.AvaliacoesActivity"
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>

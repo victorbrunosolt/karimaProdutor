@@ -1,13 +1,10 @@
 package com.example.victorbruno.karimaprodutor.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,80 +19,68 @@ import java.util.ArrayList;
  * Created by VictorBruno on 13/04/17.
  */
 
-public class GestaoAdapter extends ArrayAdapter<ParseUser> {
+public class GestaoAdapter extends RecyclerView.Adapter<GestaoAdapter.myViewHolder> {
     private Context mContext;
     private ArrayList<ParseUser> coProdutores;
-    private TextView coProdutor;
-    private  TextView status;
+    private LayoutInflater mLayoutInflater;
 
 
     public GestaoAdapter(Context c, ArrayList<ParseUser> objects) {
 
-        super(c, 0, objects);
-        this.mContext = c;
-        this.coProdutores = objects;
-
+        mContext = c;
+        coProdutores = objects;
+        mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
 
 
-    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-        ViewHolder holder;
+    public myViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mLayoutInflater.inflate(R.layout.card_layout, parent, false);
+        GestaoAdapter.myViewHolder mvh = new GestaoAdapter.myViewHolder(view);
 
-        if(view == null){
-
-            LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
-
-            view = inflater.inflate(R.layout.card_layout, parent, false);
-            holder = new ViewHolder();
-            holder.imagemUsuario = (ImageView) view.findViewById(R.id.imagem_usuario);
-            holder.coProdutor = (TextView) view.findViewById(R.id.text_coProdutor);
-            holder.status = (TextView) view.findViewById(R.id.text_status);
-            view.setTag(holder);
-
-            // monta a view a partir do xml que vai ser criado
-
-
-        }else{
-
-            holder = (ViewHolder) view.getTag();
-        }
-
-
-        if(coProdutores.size() > 0 ){
-
-            ImageView imagemUsuario = (ImageView) view.findViewById(R.id.imagem_usuario);
-            coProdutor = (TextView) view.findViewById(R.id.text_coProdutor);
-            status = (TextView) view.findViewById(R.id.text_status);
-
-            ParseUser parseUser = coProdutores.get(position);
-
-            String nome = parseUser.getUsername();
-
-            holder.coProdutor.setText(nome);
-            holder.status.setText(parseUser.get("STATUS").toString());
-
-
-            Picasso.with(mContext)
-                    .load(parseUser.getParseFile("IMAGEM").getUrl())
-                    .fit()
-                    .into(imagemUsuario);
-
-
-
-        }
-
-        return view;
-
+        return mvh;
     }
 
 
-    static class ViewHolder {
-        TextView coProdutor;
-        TextView status;
-        ImageView imagemUsuario;
+    @Override
+    public void onBindViewHolder(myViewHolder holder, int position) {
+
+
+        ParseUser parseUser = coProdutores.get(position);
+
+        String nome = parseUser.getUsername();
+
+        holder.coProdutor.setText(nome);
+        holder.status.setText(parseUser.get("STATUS").toString());
+
+
+        Picasso.with(mContext)
+                .load(parseUser.getParseFile("IMAGEM").getUrl())
+                .fit()
+                .into(holder.coProdutorFoto);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return coProdutores.size();
+    }
+
+
+    public class myViewHolder extends RecyclerView.ViewHolder {
+
+        private ImageView coProdutorFoto;
+        private TextView coProdutor;
+        private TextView status;
+
+
+        public myViewHolder(View itemView) {
+            super(itemView);
+            coProdutorFoto = (ImageView) itemView.findViewById(R.id.imagem_usuario);
+            coProdutor = (TextView) itemView.findViewById(R.id.text_coProdutor);
+            status = (TextView) itemView.findViewById(R.id.text_status);
+
+        }
     }
 }

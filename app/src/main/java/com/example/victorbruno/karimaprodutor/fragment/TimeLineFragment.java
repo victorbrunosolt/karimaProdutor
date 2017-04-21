@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.example.victorbruno.karimaprodutor.R;
 import com.example.victorbruno.karimaprodutor.adapter.TimeLineAdapter;
@@ -25,7 +23,6 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class TimeLineFragment extends Fragment {
-    private ListView listView;
     private ArrayList<ParseObject> postagensProdutor;
     private TimeLineAdapter adapter;
     private ParseQuery query;

@@ -5,8 +5,9 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:layout_height="150dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
@@ -30,7 +31,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin"
+               />
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -39,59 +41,64 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffe5e5e5"
+        android:background="#ffffff"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="10dp">
+            android:padding="10dp">
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:textAlignment="center">
+
+
+                <Button
+                    android:id="@+id/button_avaliacoes"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_star_black_24dp"
+
+                    />
+
+                <Button
+                    android:id="@+id/button_cadastrar_csa"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_add_circle_black_24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+
+                <Button
+                    android:id="@+id/button_graficos"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_assessment_black_24dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:orientation="horizontal">
+                android:layout_height="200dp">
 
-
-                <Button
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_gestao"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="aoow" />
-
-                <Button
-                    android:id="@+id/textView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="aoow" />
-
-                <Button
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="aoow" />
+                    android:scrollbars="vertical" />
 
             </LinearLayout>
-
-
-
-
-
-            <ListView
-                android:id="@+id/listView_gestao"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="0dp"
-                android:columnWidth="150dp"
-                android:drawSelectorOnTop="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:numColumns="auto_fit"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="0dp" />
 
 
         </LinearLayout>
