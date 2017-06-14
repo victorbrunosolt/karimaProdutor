@@ -3,8 +3,6 @@ package com.example.victorbruno.karimaprodutor.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -13,35 +11,41 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class CriarContaActivity extends AppCompatActivity {
 
-    private Button cadastrar;
-    private EditText nome;
-    private EditText email;
-    private EditText senha;
+
+    @BindView(R.id.editText_nome) EditText nome;
+    @BindView(R.id.editText_email) EditText email;
+    @BindView(R.id.editText_senha) EditText senha;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_criar_conta);
-        cadastrar = (Button) findViewById(R.id.button_cadastrar);
-        nome = (EditText) findViewById(R.id.editText_nome);
+        ButterKnife.bind(this);
+
         email = (EditText) findViewById(R.id.editText_email);
         senha = (EditText) findViewById(R.id.editText_senha);
 
-
-        cadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                criarConta(nome.getText().toString(), senha.getText().toString(), email.getText().toString() );
-                Intent intent = new Intent(CriarContaActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
     }
+
+    @OnClick(R.id.button_cadastrar)
+    public void cadastrar() {
+        if(nome.getText().length() != 0){
+            criarConta(nome.getText().toString(), senha.getText().toString(), email.getText().toString() );
+        }else {
+
+            Toast.makeText(this,"Preencha o campo nome", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
 
 
     private void criarConta(String nome, String senha, String email){

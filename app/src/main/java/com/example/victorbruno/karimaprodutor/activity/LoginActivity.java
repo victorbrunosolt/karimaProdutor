@@ -68,7 +68,10 @@ private void login(String login, String senha){
 
     ParseUser.logInInBackground(login,senha, new LogInCallback() {
         public void done(ParseUser user, ParseException e) {
-            if (user != null) {
+            if (user != null ) {
+                 String tipo = (String) user.get("TIPO");
+                if (tipo.equals("produtor")){
+
                 // Hooray! The user is logged in.
                 Toast.makeText(getApplicationContext(),"login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
@@ -76,8 +79,14 @@ private void login(String login, String senha){
                 startActivity(intent);
 
             } else {
+                    Toast.makeText(getApplicationContext(),"Voce não tem permissão para acessar baixe o app para co-produtores" + e, Toast.LENGTH_SHORT).show();
+
+            }
+            }else {
                 // Signup failed. Look at the ParseException to see what happened.
                 Toast.makeText(getApplicationContext(),"erro ao fazer login" + e, Toast.LENGTH_SHORT).show();
+
+
             }
         }
     });

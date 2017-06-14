@@ -1,6 +1,7 @@
 package com.example.victorbruno.karimaprodutor.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +9,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.victorbruno.karimaprodutor.R;
+import com.example.victorbruno.karimaprodutor.activity.DetalhesTimeLineActivity;
 import com.parse.ParseObject;
-import com.squareup.picasso.Picasso;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by VictorBruno on 17/04/17.
@@ -21,12 +29,14 @@ import java.util.ArrayList;
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.myViewHolder> {
     private Context mContext;
     private ArrayList<ParseObject> postagensProdutor;
+    private ArrayList<ParseUser> usuarioPostagem;
     private LayoutInflater mLayoutInflater;
 
 
-    public TimeLineAdapter(Context c, ArrayList<ParseObject> objects) {
+    public TimeLineAdapter(Context c, ArrayList<ParseObject> objects, ArrayList<ParseUser> objectsUsuario) {
         mContext = c;
         postagensProdutor = objects;
+        usuarioPostagem = objectsUsuario;
         mLayoutInflater = (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -42,14 +52,28 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.myView
     @Override
     public void onBindViewHolder(myViewHolder holder, int position) {
 
-        holder.titulo.setText("CSA Floresta");
-        holder.legenda.setText("olha ai galera!!");
 
         ParseObject parseObject = postagensProdutor.get(position);
+        ParseUser parseUser = usuarioPostagem.get(position);
 
-        Picasso.with(mContext)
-                .load(parseObject.getParseFile("IMAGEM").getUrl())
-                .fit()
+        if (parseUser != null) {
+            String nomeUsuario = parseUser.getUsername();
+            holder.titulo.setText(nomeUsuario);
+        } else {
+            holder.titulo.setText("Usuario Excluido");
+        }
+
+
+        String descricao = (String) parseObject.get("DESCRICAO");
+
+
+        holder.legenda.setText(descricao);
+
+        Glide.with(mContext).load(parseObject.getParseFile("IMAGEM").getUrl())
+                .thumbnail(0.5f)
+                .centerCrop()
+                .crossFade()
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(holder.postagem);
 
 
@@ -61,19 +85,29 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.myView
     }
 
 
-    public class myViewHolder extends RecyclerView.ViewHolder {
+    public class myViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private ImageView postagem;
-        private TextView titulo;
-        private TextView legenda;
+        @BindView(R.id.imagem_view_time_line) ImageView postagem;
+        @BindView(R.id.text_titulo) TextView titulo;
+        @BindView(R.id.text_legenda) TextView legenda;
+
 
 
         public myViewHolder(View itemView) {
             super(itemView);
-            postagem = (ImageView) itemView.findViewById(R.id.imagem_view_time_line);
-            titulo = (TextView) itemView.findViewById(R.id.text_titulo);
-            legenda = (TextView) itemView.findViewById(R.id.text_legenda);
+            ButterKnife.bind(this, itemView);
+        }
 
+
+        @OnClick
+        public void onClick(View v) {
+            ParseObject parseObject = postagensProdutor.get(getPosition());
+            // envia dados para o activity detalhes da time line
+            Intent intent = new Intent(mContext, DetalhesTimeLineActivity.class);
+            String objectId = parseObject.getObjectId();
+            intent.putExtra("objectId", objectId);
+            intent.putExtra("nome", titulo.getText());
+            mContext.startActivity(intent);
         }
     }
 

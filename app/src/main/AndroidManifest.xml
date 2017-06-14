@@ -39,17 +39,19 @@
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoActionBar" />
-        <activity android:name=".activity.CadastrarCsaActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.GraficosActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.AvaliacoesActivity"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait">
-
-        </activity>
+        <activity
+            android:name=".activity.CadastrarCsaActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".activity.GraficosActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name=".activity.AvaliacoesActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar"></activity>
+        <activity android:name=".activity.DetalhesTimeLineActivity"></activity>
     </application>
 
 </manifest>

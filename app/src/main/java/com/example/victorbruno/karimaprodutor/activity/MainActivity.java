@@ -10,6 +10,8 @@ import com.example.victorbruno.karimaprodutor.adapter.TabsAdapter;
 import com.example.victorbruno.karimaprodutor.util.SlidingTabLayout;
 import com.parse.ParseUser;
 
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
     private SlidingTabLayout mSlidingTabLayout ;
@@ -22,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
+
+        ButterKnife.bind(this);
 
         if (ParseUser.getCurrentUser() == null) {
 

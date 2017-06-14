@@ -6,6 +6,7 @@
     <color name="black_overlay">#66000000</color>
     <color name="preto">#000000</color>
     <color name="cinza">#424242</color>
+    <color name="grey">#ddd</color>
     #424242
 
 </resources>

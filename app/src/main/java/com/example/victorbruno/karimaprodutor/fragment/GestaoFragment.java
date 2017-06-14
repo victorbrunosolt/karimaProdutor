@@ -3,6 +3,7 @@ package com.example.victorbruno.karimaprodutor.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +18,7 @@ import com.example.victorbruno.karimaprodutor.activity.CadastrarCsaActivity;
 import com.example.victorbruno.karimaprodutor.adapter.GestaoAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -34,6 +36,7 @@ public class GestaoFragment extends Fragment {
     private Button avaliacoes;
     private Button cadastrarCsa;
     private Button graficos;
+    private ParseObject csa;
 
 
 
@@ -45,48 +48,43 @@ public class GestaoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_gestao, container, false);
 
-        getCoProdutores();
-        // inicializa o array de coProdutores
-        coProdutores = new ArrayList<>();
-
-        //recyclerView
-        mRecyclerViewGestao = (RecyclerView) view.findViewById(R.id.recycler_gestao);
-        mRecyclerViewGestao.setHasFixedSize(true);
-        mRecyclerViewGestao.setOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewGestao.getLayoutManager();
-                GestaoAdapter timeLineAdapter = (GestaoAdapter) mRecyclerViewGestao.getAdapter();
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-            }
-        });
-        LinearLayoutManager llm = new LinearLayoutManager(getActivity());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        mRecyclerViewGestao.setLayoutManager(llm);
-
-        // seta o adapter
-
-        adapter = new GestaoAdapter(getActivity(), coProdutores);
-        mRecyclerViewGestao.setAdapter(adapter);
-
-       recuperaElementosTela(view);
 
 
+            getCoProdutores();
+            // inicializa o array de coProdutores
+            coProdutores = new ArrayList<>();
 
+            //recyclerView
+            mRecyclerViewGestao = (RecyclerView) view.findViewById(R.id.recycler_gestao);
+            mRecyclerViewGestao.setHasFixedSize(true);
+            mRecyclerViewGestao.setOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerViewGestao.getLayoutManager();
+                    GestaoAdapter timeLineAdapter = (GestaoAdapter) mRecyclerViewGestao.getAdapter();
+                }
 
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                }
+            });
+            LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+            llm.setOrientation(LinearLayoutManager.VERTICAL);
+            mRecyclerViewGestao.setLayoutManager(llm);
 
+            // seta o adapter
 
+            adapter = new GestaoAdapter(getActivity(), coProdutores);
+            mRecyclerViewGestao.setAdapter(adapter);
 
-        return view;
+            recuperaElementosTela(view);
+
+            return view;
 
 
     }
@@ -112,6 +110,22 @@ public class GestaoFragment extends Fragment {
                 }
             }
         });
+
+    }
+
+    @Nullable
+    private String getCSA(){
+
+
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+       if(currentUser.get("CSA_RESPONSAVEL").toString() != null){
+          return currentUser.get("CSA_RESPONSAVEL").toString();
+       }else {
+           return null;
+       }
+
+
 
     }
 
